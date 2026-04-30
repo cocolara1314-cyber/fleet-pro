@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Plus, Search, Filter, Car, Edit, Trash2, Eye } from 'lucide-react';
 import { useVehicleStore } from '../store/vehicleStore';
-import { formatCurrency, getStatusColor, getStatusLabel, getVehicleAge } from '../utils/helpers';
+import { getStatusColor, getStatusLabel, getVehicleAge } from '../utils/helpers';
 import type { Vehicle, VehicleStatus } from '../types';
 
 const statusOptions: VehicleStatus[] = ['active', 'maintenance', 'inactive', 'retired'];

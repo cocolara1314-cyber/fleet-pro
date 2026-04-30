@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import { Building2, Plus, Trash2, Database, Check, Loader2 } from 'lucide-react';
+import { Building2, Plus, Database, Check, Loader2 } from 'lucide-react';
 import { useVehicleStore } from '../store/vehicleStore';
 import { seedDemoData } from '../lib/seedData';
-import type { Company } from '../types';
 
 export default function SettingsPage() {
   const [demoLoading, setDemoLoading] = useState(false);

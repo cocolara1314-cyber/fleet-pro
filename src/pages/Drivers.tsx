@@ -17,8 +17,6 @@ export default function Drivers() {
     updateDriver, 
     deleteDriver 
   } = useVehicleStore();
-
-  const currentCompany = companies.find((c) => c.id === currentCompanyId);
   
   const companyDrivers = currentCompanyId 
     ? drivers.filter(d => d.companyId === currentCompanyId)

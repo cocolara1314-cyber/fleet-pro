@@ -3,9 +3,9 @@ import {
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 } from 'recharts';
-import { FileText, TrendingUp, Car, Fuel, Wrench, Shield, AlertTriangle, Download } from 'lucide-react';
+import { TrendingUp, Car, Fuel, Wrench, Shield, AlertTriangle, Download } from 'lucide-react';
 import { useVehicleStore } from '../store/vehicleStore';
-import { formatCurrency, formatDate, exportToCSV } from '../utils/helpers';
+import { formatCurrency, exportToCSV } from '../utils/helpers';
 import { format, subMonths, startOfMonth, endOfMonth, isWithinInterval } from 'date-fns';
 
 const COLORS = ['#3b82f6', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6', '#06b6d4'];
@@ -166,8 +166,8 @@ export default function ReportsPage() {
                 <BarChart data={monthlyCostData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
-                  <YAxis tickFormatter={(v) => v.toLocaleString()} />
-                  <Tooltip formatter={(v: number) => formatCurrency(v, currency)} />
+                  <YAxis tickFormatter={(v: number) => v.toLocaleString()} />
+                  <Tooltip formatter={(value: any) => formatCurrency(value, currency)} />
                   <Legend />
                   <Bar dataKey="Fuel" fill="#22c55e" />
                   <Bar dataKey="Maintenance" fill="#3b82f6" />
@@ -190,10 +190,10 @@ export default function ReportsPage() {
                 <div className="flex flex-col md:flex-row items-center gap-6">
                   <ResponsiveContainer width="100%" height={250}>
                     <PieChart>
-                      <Pie data={costBreakdown} cx="50%" cy="50%" outerRadius={100} dataKey="value" label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}>
+                      <Pie data={costBreakdown} cx="50%" cy="50%" outerRadius={100} dataKey="value" label={({ name, percent }: { name?: string; percent?: number }) => name && percent !== undefined ? `${name} ${(percent * 100).toFixed(0)}%` : ''}>
                         {costBreakdown.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
                       </Pie>
-                      <Tooltip formatter={(v: number) => formatCurrency(v, currency)} />
+                      <Tooltip formatter={(value: any) => formatCurrency(value, currency)} />
                     </PieChart>
                   </ResponsiveContainer>
                   <div className="flex-1 min-w-48">
@@ -240,7 +240,7 @@ export default function ReportsPage() {
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis type="number" tickFormatter={(v) => v.toLocaleString()} />
                     <YAxis type="category" dataKey="plate" width={80} />
-                    <Tooltip formatter={(v: number) => formatCurrency(v, currency)} />
+                    <Tooltip formatter={(value: any) => formatCurrency(value, currency)} />
                     <Legend />
                     <Bar dataKey="fuel" name="Fuel" fill="#22c55e" stackId="a" />
                     <Bar dataKey="maint" name="Maintenance" fill="#3b82f6" stackId="a" />
@@ -297,9 +297,10 @@ export default function ReportsPage() {
                 <LineChart data={fuelTrendData}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis dataKey="month" />
-                  <YAxis yAxisId="left" tickFormatter={(v) => `${v}L`} />
-                  <YAxis yAxisId="right" orientation="right" tickFormatter={(v) => v.toLocaleString()} />
-                  <Tooltip formatter={(v: number, name: string) => name === 'Cost' ? formatCurrency(v, currency) : `${v} L`} />
+                  <YAxis yAxisId="left" tickFormatter={(v: number) => `${v}L`} />
+                  <YAxis yAxisId="right" orientation="right" tickFormatter={(v: number) => v.toLocaleString()} />
+                  {/* @ts-ignore */}
+                  <Tooltip formatter={(value: any, name?: string) => name === 'Cost' ? formatCurrency(value, currency) : `${value || 0} L`} />
                   <Legend />
                   <Line yAxisId="left" type="monotone" dataKey="Liters" stroke="#22c55e" strokeWidth={2} />
                   <Line yAxisId="right" type="monotone" dataKey="Cost" stroke="#3b82f6" strokeWidth={2} />
@@ -343,7 +344,6 @@ export default function ReportsPage() {
               {(() => {
                 const issues = complianceData.expiredInsurance + complianceData.expiredInspection + complianceData.pendingFines;
                 const warnings = complianceData.expiringInsurance + complianceData.expiringInspection + complianceData.expiringLicenses;
-                const total = companyVehicles.length || 1;
                 const score = Math.max(0, 100 - (issues * 15) - (warnings * 5));
                 return (
                   <div className="text-center">

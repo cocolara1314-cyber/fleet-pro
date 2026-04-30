@@ -42,6 +42,7 @@ export default function InsurancePage() {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const data = {
+      companyId: currentCompanyId || companies[0]?.id || '',
       vehicleId: fd.get('vehicleId') as string,
       policyNumber: fd.get('policyNumber') as string,
       company: fd.get('company') as string,

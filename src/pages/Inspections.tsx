@@ -41,6 +41,7 @@ export default function InspectionsPage() {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const data = {
+      companyId: currentCompanyId || companies[0]?.id || '',
       vehicleId: fd.get('vehicleId') as string,
       inspectionDate: fd.get('inspectionDate') as string,
       expiryDate: fd.get('expiryDate') as string,

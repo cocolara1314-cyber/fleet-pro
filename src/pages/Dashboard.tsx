@@ -6,11 +6,10 @@ import {
   Wrench, 
   Shield,
   TrendingUp,
-  TrendingDown,
   Calendar
 } from 'lucide-react';
 import { useVehicleStore } from '../store/vehicleStore';
-import { formatCurrency, getStatusColor, getStatusLabel, formatDate, getDaysUntilExpiry, getAlertLevel } from '../utils/helpers';
+import { formatCurrency, getStatusLabel, formatDate, getDaysUntilExpiry, getAlertLevel } from '../utils/helpers';
 import type { DashboardStats, Insurance, Inspection, Maintenance, Fine } from '../types';
 
 export default function Dashboard() {

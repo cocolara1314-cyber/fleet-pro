@@ -64,6 +64,7 @@ export interface Driver {
 export interface Maintenance {
   id: string;
   vehicleId: string;
+  companyId: string;
   maintenanceDate: string;
   mileage: number;
   type: 'routine' | 'repair' | 'inspection';
@@ -92,6 +93,7 @@ export type InsuranceStatus = 'active' | 'expired' | 'cancelled';
 export interface Insurance {
   id: string;
   vehicleId: string;
+  companyId: string;
   policyNumber: string;
   company: string;
   companyPhone?: string;
@@ -120,6 +122,7 @@ export type ViolationType =
 export interface Fine {
   id: string;
   vehicleId: string;
+  companyId: string;
   driverId?: string;
   fineNumber?: string;
   fineDate: string;
@@ -143,6 +146,7 @@ export type RepairPriority = 'low' | 'medium' | 'high' | 'urgent';
 export interface Repair {
   id: string;
   vehicleId: string;
+  companyId: string;
   requestDate: string;
   startDate?: string;
   completionDate?: string;
@@ -174,6 +178,7 @@ export interface RepairPart {
 export interface FuelRecord {
   id: string;
   vehicleId: string;
+  companyId: string;
   fuelDate: string;
   mileage: number;
   liters: number;
@@ -195,6 +200,7 @@ export type InspectionResult = 'pass' | 'fail' | 'conditional';
 export interface Inspection {
   id: string;
   vehicleId: string;
+  companyId: string;
   inspectionDate: string;
   expiryDate: string;
   result: InspectionResult;

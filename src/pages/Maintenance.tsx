@@ -47,6 +47,7 @@ export default function MaintenancePage() {
     const fd = new FormData(e.currentTarget);
     const validItems = items.filter((i) => i.name.trim());
     const data = {
+      companyId: currentCompanyId || companies[0]?.id || '',
       vehicleId: fd.get('vehicleId') as string,
       maintenanceDate: fd.get('maintenanceDate') as string,
       mileage: parseInt(fd.get('mileage') as string) || 0,

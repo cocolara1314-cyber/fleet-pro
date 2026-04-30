@@ -8,10 +8,7 @@ import {
   Shield, 
   AlertTriangle,
   Fuel,
-  ClipboardCheck,
   Settings,
-  User,
-  Calendar,
   Gauge
 } from 'lucide-react';
 import { useVehicleStore } from '../store/vehicleStore';
@@ -31,21 +28,13 @@ export default function VehicleDetail() {
   
   const { 
     companies,
-    vehicles, 
     drivers,
-    maintenances,
-    insurances,
-    fines,
-    repairs,
-    fuelRecords,
-    inspections,
     getVehicleById,
     getVehicleMaintenances,
     getVehicleInsurances,
     getVehicleFines,
     getVehicleRepairs,
-    getVehicleFuelRecords,
-    getVehicleInspections
+    getVehicleFuelRecords
   } = useVehicleStore();
 
   const vehicle = id ? getVehicleById(id) : undefined;
@@ -57,8 +46,7 @@ export default function VehicleDetail() {
   const vehicleFines = vehicle ? getVehicleFines(vehicle.id) : [];
   const vehicleRepairs = vehicle ? getVehicleRepairs(vehicle.id) : [];
   const vehicleFuelRecords = vehicle ? getVehicleFuelRecords(vehicle.id) : [];
-  const vehicleInspections = vehicle ? getVehicleInspections(vehicle.id) : [];
-
+  
   if (!vehicle) {
     return (
       <div className="text-center py-12">

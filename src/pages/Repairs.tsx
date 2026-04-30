@@ -39,8 +39,8 @@ export default function RepairsPage() {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const laborCost = parseFloat(fd.get('laborCost') as string) || 0;
-    const partsCost = parts.reduce((s, p) => s + p.totalCost, 0);
     const data = {
+      companyId: currentCompanyId || companies[0]?.id || '',
       vehicleId: fd.get('vehicleId') as string,
       requestDate: fd.get('requestDate') as string,
       startDate: (fd.get('startDate') as string) || undefined,

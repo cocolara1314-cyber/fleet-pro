@@ -53,6 +53,7 @@ export default function FinesPage() {
     const fd = new FormData(e.currentTarget);
     const status = fd.get('status') as FineStatus;
     const data = {
+      companyId: currentCompanyId || companies[0]?.id || '',
       vehicleId: fd.get('vehicleId') as string,
       driverId: (fd.get('driverId') as string) || undefined,
       fineNumber: fd.get('fineNumber') as string,

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Outlet, NavLink, useLocation } from 'react-router-dom';
+import { Outlet, NavLink } from 'react-router-dom';
 import {
   LayoutDashboard,
   Car,
@@ -33,10 +33,10 @@ const navigation = [
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const location = useLocation();
   
   const { companies, currentCompanyId, setCurrentCompany } = useVehicleStore();
   const currentCompany = companies.find((c) => c.id === currentCompanyId);
+  
 
   return (
     <div className="min-h-screen bg-gray-50">

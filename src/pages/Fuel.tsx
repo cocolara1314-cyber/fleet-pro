@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Search, Fuel, Edit, Trash2, TrendingUp, TrendingDown } from 'lucide-react';
+import { Plus, Search, Fuel, Edit, Trash2, TrendingUp } from 'lucide-react';
 import { useVehicleStore } from '../store/vehicleStore';
 import { formatCurrency, formatDate, calculateAverageConsumption } from '../utils/helpers';
 import type { FuelRecord } from '../types';
@@ -47,6 +47,7 @@ export default function FuelPage() {
     const liters = parseFloat(fd.get('liters') as string) || 0;
     const pricePerLiter = parseFloat(fd.get('pricePerLiter') as string) || 0;
     const data = {
+      companyId: currentCompanyId || companies[0]?.id || '',
       vehicleId: fd.get('vehicleId') as string,
       fuelDate: fd.get('fuelDate') as string,
       mileage: parseInt(fd.get('mileage') as string) || 0,
